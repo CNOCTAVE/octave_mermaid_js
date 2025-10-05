@@ -1,0 +1,21 @@
+Name: octave_mermaid_js
+Version: 0.1.0
+Date: 2025-10-21
+Author: various authors
+Maintainer: Yu Hongbo <yuhongbo@member.fsf.org>, CNOCTAVE <cnoctave@qq.com>
+Title: Octave Mermaid.js
+Description: The octave_mermaid_js package is used to generate,
+      show and save a diagram from a Mermaid graph description 
+      string. You can use octave_mermaid_js to create flowcharts, 
+      sequence diagrams, class diagrams, state diagrams, 
+      ER diagram, user journey diagrams, Gantt charts, 
+      pie charts, quadrant charts, requirement diagrams, 
+      Git Graphs, C4 Diagrams, Mindmaps, timelines, ZenUML, 
+      Sankey diagrams, XY Charts, Block Diagrams, 
+      packet diagrams, Mermaid’s Kanban diagrams, 
+      architecture diagrams, radar diagrams and
+      treemap diagrams.
+
+Depends: octave (>= 8.2.0)
+License: GPLv3+
+Url: https://github.com/CNOCTAVE/octave_mermaid_js

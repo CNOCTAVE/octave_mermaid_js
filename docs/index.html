@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+Copyright 2024-2025 Yu Hongbo <yuhongbo@member.fsf.org>, 
+  CNOCTAVE <cnoctave@qq.com>
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.
+-->
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+    <meta name="theme-color" content="#00B4FF">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="msapplication-TileImage" content="favicon.ico">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="apple-mobile-web-app-title" content="octave_mermaid_js文档">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@^4.0.0/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.17.0/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <title>octave_mermaid_js文档</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta name="title" content="octave_mermaid_js文档" data-qmeta="title">
+    <meta property="og:title" content="octave_mermaid_js文档" data-qmeta="ogTitle">
+    <meta name="twitter:title" content="octave_mermaid_js文档" data-qmeta="twitterTitle">
+    <meta name="description" content="Octave中文网是一个面向中文Octave开发者的交流平台，拥有中文Octave文档、中文Octave论坛和中文Octave新闻等特色。"
+        data-qmeta="description">
+    <meta property="og:description" content="Octave中文网是一个面向中文Octave开发者的交流平台，拥有中文Octave文档、中文Octave论坛和中文Octave新闻等特色。"
+        data-qmeta="ogDesc">
+    <meta name="twitter:description" content="Octave中文网是一个面向中文Octave开发者的交流平台，拥有中文Octave文档、中文Octave论坛和中文Octave新闻等特色。"
+        data-qmeta="twitterDesc">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+
+<body>
+    <div id="q-app">
+        <q-layout view="hHh LpR fFf">
+            <q-header elevated class="bg-primary text-white">
+                <q-toolbar class="bg-primary text-white q-ny-md shadow-2">
+                    <q-btn stretch flat label="Octave中文网" @click="goTo('http://cnoctave.top')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="octave_mermaid_js文档" @click="scrollToTop()"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-space></q-space>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn-dropdown stretch flat icon="translate" label="切换文档语言">
+                      <q-list>
+                        <q-item clickable v-close-popup @click="goTo('index.html')">
+                          <q-item-section>
+                            <q-item-label>zh-CN 简体中文</q-item-label>
+                          </q-item-section>
+                        </q-item>
+                      </q-list>
+                    </q-btn-dropdown>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="中文版Octave文档" @click="goTo('http://docs.cnoctave.top')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="学术交流论坛" @click="goTo('http://forum.cnoctave.top')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="新闻" @click="goTo('https://octave.org/news.html')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="使用方法" @click="goTo('https://wiki.octave.org/Using_Octave')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="免费下载" @click="goTo('https://octave.org/download')"></q-btn>
+                </q-toolbar>
+            </q-header>
+            <q-drawer class="bg-primary" show-if-above v-model="leftDrawerOpen" side="left" bordered elevated>
+                <q-list class="title1 text-white bg-primary">
+                    <q-item clickable v-ripple @click="goToID('#homepage')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            项目首页
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#repo_install')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            软件源安装
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#online_install')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            在线安装
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#source_code_install')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            源码安装
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#how_to_use')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            如何使用
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#dependencies')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            依赖库
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#function_usage')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            函数用法
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#common_examples')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            常见用例
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#flowchart')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            流程图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#sequence_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            时序图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#class_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            类图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#state_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            状态图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#er_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            ER图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#user_journey_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            路线图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#gantt_chart')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            甘特图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#pie_chart')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            饼图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#quadrant_chart')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            象限图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#requirement_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            依赖图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#git_graph')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            Git图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#c4_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            C4图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#mindmap')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            思维导图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#timeline')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            时间线图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#zenuml')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            ZenUML
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#sankey_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            Sankey图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#xy_chart')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            XY图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#block_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            方块图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#packet_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            数据包图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#mermaid_s_kanban_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            Mermaid的看板图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#architecture_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            架构图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#radar_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            雷达图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#treemap_diagram')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            矩形树图
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#references')">
+                        <q-item-section avatar>
+                            <q-icon name="help"></q-icon>
+                        </q-item-section>
+                        <q-item-section>
+                            引用octave_mermaid_js
+                        </q-item-section>
+                    </q-item>
+                </q-list>
+            </q-drawer>
+
+            <q-page-container>
+                <div style="position: relative;">
+                    <q-img src="banner0.png" spinner-color="white" style="width: 100%; height: 300px;"></q-img>
+                    <div class="q-mx-md rainbow-text"
+                        style="line-height: 300px; font-size: 100px; position: absolute; left: 0%; top: 0%;">octave_mermaid_js文档
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="main">
+                        <div class="text-h5 q-ma-md text-red-10">欢迎广大开发者将此文档翻译为其他语言。</div>
+                        <q-btn id="homepage" class="title1 text-white bg-primary" stretch flat
+                            label="项目首页：https://github.com/CNOCTAVE/octave_mermaid_js" @click="goTo('https://github.com/CNOCTAVE/octave_mermaid_js')"></q-btn>
+                        <q-separator></q-separator>
+                        <div id="repo_install" class="title1 q-ma-md text-primary">软件源安装</div>
+                        <p class="q-ma-md">octave_mermaid_js可以通过Octave软件源安装。</p>
+                        <div class="text-h5 q-ma-md text-red-10">通过Octave软件源安装octave_mermaid_js，代码如下：</div>
+                        <p class="q-ma-md">>> pkg install -forge octave_mermaid_js</p>
+                        <q-separator></q-separator>
+                        <div id="online_install" class="title1 q-ma-md text-primary">在线安装</div>
+                        <p class="q-ma-md">octave_mermaid_js可以在线安装。</p>
+                        <div class="text-h5 q-ma-md text-red-10">在线安装octave_mermaid_js，代码如下：</div>
+                        <p class="q-ma-md">>> pkg install 'https://github.com/CNOCTAVE/octave_mermaid_js/releases/download/1.0.0/octave_mermaid_js.tar.gz'</p>
+                        <q-separator></q-separator>
+                        <div id="source_code_install" class="title1 q-ma-md text-primary">源码安装</div>
+                        <p class="q-ma-md">octave_mermaid_js可以直接使用tar包安装。</p>
+                        <div class="text-h5 q-ma-md text-red-10">
+                            假设你下载的源码包名为octave_mermaid_js.tar.gz，源码安装的代码如下：</div>
+                        <p class="q-ma-md">>> pkg install octave_mermaid_js.tar.gz -local</p>
+                        <q-separator></q-separator>
+                        <div id="how_to_use" class="title1 q-ma-md text-primary">如何使用</div>
+                        <div class="text-h5 q-ma-md text-red-10">在安装后，加载octave_mermaid_js即可使用，代码如下：</div>
+                        <p class="q-ma-md">>> pkg load octave_mermaid_js</p>
+                        <q-separator></q-separator>
+                        <div id="dependencies" class="title1 q-ma-md text-primary">依赖库</div>
+                        <div class="text-h5 q-ma-md text-red-10">不同的Linux发行版有不同的依赖库名。</div>
+                        <div class="text-h5 q-ma-md text-red-10">Fedora：</div>
+                        <p class="q-ma-md">$ sudo dnf install python3-pillow python3-matplotlib python3-requests</p>
+                        <div class="text-h5 q-ma-md text-red-10">在其他的Linux发行版上的命令有所不同。欢迎广大开发者补充。
+                        </div>
+                        <q-separator></q-separator>
+                        <div id="function_usage" class="title1 q-ma-md text-primary">函数用法</div>
+                        <div class="text-h5 q-ma-md text-red-10">mermaid_js_imshow</div>
+                        <p class="q-ma-md">[ret, status] = mermaid_js_imshow (GRAPH)</p>
+                        <p class="q-ma-md">输入Markdown格式的图GRAPH，显示图片。</p>
+                        <p class="q-ma-md">返回内部输出ret和图片生成状态status。</p>
+                        <p class="q-ma-md">如果status=0，则代表图片生成成功，否则代表图片生成失败。</p>
+                        <p class="q-ma-md">如果图片生成失败，那么将显示失败或显示错误的图片。</p>
+                        <q-separator></q-separator>
+                        <div class="text-h5 q-ma-md text-red-10">mermaid_js_save</div>
+                        <p class="q-ma-md">[ret, status] = mermaid_js_save (GRAPH, FILE_PATH)</p>
+                        <p class="q-ma-md">输入Markdown格式的图GRAPH和保存图片的文件名FILE_PATH，保存图片。</p>
+                        <p class="q-ma-md">返回内部输出ret和图片生成状态status。</p>
+                        <p class="q-ma-md">如果status=0，则代表图片生成成功，否则代表图片生成失败。</p>
+                        <p class="q-ma-md">如果图片生成失败，那么将保存失败或保存错误的图片。</p>
+                        <q-separator></q-separator>
+                        <div class="text-h5 q-ma-md text-red-10">mermaid_js_examples</div>
+                        <p class="q-ma-md">mermaid_js_example_string = mermaid_js_examples (NAME)</p>
+                        <p class="q-ma-md">获取octave_mermaid_js的用例。</p>
+                        <p class="q-ma-md">支持的用例如下：</p>
+                        <p class="q-ma-md">flowchart | 流程图</p>
+                        <p class="q-ma-md">sequence_diagram | 时序图</p>
+                        <p class="q-ma-md">class_diagram | 类图</p>
+                        <p class="q-ma-md">state_diagram | 状态图</p>
+                        <p class="q-ma-md">er_diagram | ER图</p>
+                        <p class="q-ma-md">user_journey_diagram | 路线图</p>
+                        <p class="q-ma-md">gantt_chart | 甘特图</p>
+                        <p class="q-ma-md">pie_chart | 饼图</p>
+                        <p class="q-ma-md">quadrant_chart | 象限图</p>
+                        <p class="q-ma-md">requirement_diagram | 依赖图</p>
+                        <p class="q-ma-md">git_graph | Git图</p>
+                        <p class="q-ma-md">c4_diagram | C4图</p>
+                        <p class="q-ma-md">mindmap | 思维导图</p>
+                        <p class="q-ma-md">timeline | 时间线图</p>
+                        <p class="q-ma-md">zenuml | ZenUML</p>
+                        <p class="q-ma-md">sankey_diagram | Sankey图</p>
+                        <p class="q-ma-md">xy_chart | XY图</p>
+                        <p class="q-ma-md">block_diagram | 方块图</p>
+                        <p class="q-ma-md">packet_diagram | 数据包图</p>
+                        <p class="q-ma-md">mermaid_s_kanban_diagram | Mermaid的看板图</p>
+                        <p class="q-ma-md">architecture_diagram | 架构图</p>
+                        <p class="q-ma-md">radar_diagram | 雷达图</p>
+                        <p class="q-ma-md">treemap_diagram | 矩形树图</p>
+                        <q-separator></q-separator>
+                        <div id="common_examples" class="title1 q-ma-md text-primary">常见用例</div>
+                        <div class="text-h5 q-ma-md text-red-10">保存并显示Markdown图，代码如下：</div>
+                        <pre><code class="matlab">graph = {
+    "graph LR;"
+    "    A--> B & C & D"
+    "    B--> A & E"
+    "    C--> A & E"
+    "    D--> A & E"
+    "    E--> B & C & D"
+};
+graph = strjoin(graph, "\n");
+[ret, status] = mermaid_js_save(graph, "result.png")
+[ret, status] = mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="flowchart" class="title1 q-ma-md text-primary">流程图</div>
+                        <div class="text-h5 q-ma-md text-red-10">流程图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/flowchart.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用流程图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("flowchart")
+graph = flowchart LR
+    Start --> Stop
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="sequence_diagram" class="title1 q-ma-md text-primary">时序图</div>
+                        <div class="text-h5 q-ma-md text-red-10">时序图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/sequenceDiagram.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用时序图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("sequence_diagram")
+graph = sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+    Alice-)John: See you later!
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="class_diagram" class="title1 q-ma-md text-primary">类图</div>
+                        <div class="text-h5 q-ma-md text-red-10">类图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/classDiagram.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用类图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("class_diagram")
+graph = ---
+title: Animal example
+---
+classDiagram
+    note "From Duck till Zebra"
+    Animal &lt;|-- Duck
+    note for Duck "can fly\ncan swim\ncan dive\ncan help in debugging"
+    Animal &lt;|-- Fish
+    Animal &lt;|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish{
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra{
+        +bool is_wild
+        +run()
+    }
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="state_diagram" class="title1 q-ma-md text-primary">状态图</div>
+                        <div class="text-h5 q-ma-md text-red-10">状态图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/stateDiagram.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用状态图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("state_diagram")
+graph = ---
+title: Simple sample
+---
+stateDiagram-v2
+    [*] --> Still
+    Still --> [*]
+    Still --> Moving
+    Moving --> Still
+    Moving --> Crash
+    Crash --> [*]
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="er_diagram" class="title1 q-ma-md text-primary">ER图</div>
+                        <div class="text-h5 q-ma-md text-red-10">ER图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/entityRelationshipDiagram.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用ER图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("er_diagram")
+graph = ---
+title: Order example
+---
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE-ITEM : contains
+    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="user_journey_diagram" class="title1 q-ma-md text-primary">路线图</div>
+                        <div class="text-h5 q-ma-md text-red-10">路线图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/userJourney.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用路线图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("user_journey_diagram")
+graph = journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 5: Me
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="gantt_chart" class="title1 q-ma-md text-primary">甘特图</div>
+                        <div class="text-h5 q-ma-md text-red-10">甘特图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/gantt.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用甘特图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("gantt_chart")
+graph = gantt
+    title A Gantt Diagram
+    dateFormat YYYY-MM-DD
+    section Section
+        A task          :a1, 2014-01-01, 30d
+        Another task    :after a1, 20d
+    section Another
+        Task in Another :2014-01-12, 12d
+        another task    :24d
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="pie_chart" class="title1 q-ma-md text-primary">饼图</div>
+                        <div class="text-h5 q-ma-md text-red-10">饼图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/pie.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用饼图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("pie_chart")
+graph = pie title Pets adopted by volunteers
+    "Dogs" : 386
+    "Cats" : 85
+    "Rats" : 15
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="quadrant_chart" class="title1 q-ma-md text-primary">象限图</div>
+                        <div class="text-h5 q-ma-md text-red-10">象限图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/quadrantChart.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用象限图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("quadrant_chart")
+graph = quadrantChart
+    title Reach and engagement of campaigns
+    x-axis Low Reach --> High Reach
+    y-axis Low Engagement --> High Engagement
+    quadrant-1 We should expand
+    quadrant-2 Need to promote
+    quadrant-3 Re-evaluate
+    quadrant-4 May be improved
+    Campaign A: [0.3, 0.6]
+    Campaign B: [0.45, 0.23]
+    Campaign C: [0.57, 0.69]
+    Campaign D: [0.78, 0.34]
+    Campaign E: [0.40, 0.34]
+    Campaign F: [0.35, 0.78]
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="requirement_diagram" class="title1 q-ma-md text-primary">依赖图</div>
+                        <div class="text-h5 q-ma-md text-red-10">依赖图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/requirementDiagram.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用依赖图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("requirement_diagram")
+graph =     requirementDiagram
+
+    requirement test_req {
+    id: 1
+    text: the test text.
+    risk: high
+    verifymethod: test
+    }
+
+    element test_entity {
+    type: simulation
+    }
+
+    test_entity - satisfies -> test_req
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="git_graph" class="title1 q-ma-md text-primary">Git图</div>
+                        <div class="text-h5 q-ma-md text-red-10">Git图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/gitgraph.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用Git图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("git_graph")
+graph = ---
+title: Example Git diagram
+---
+gitGraph
+   commit
+   commit
+   branch develop
+   checkout develop
+   commit
+   commit
+   checkout main
+   merge develop
+   commit
+   commit
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="c4_diagram" class="title1 q-ma-md text-primary">C4图</div>
+                        <div class="text-h5 q-ma-md text-red-10">C4图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/c4.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用C4图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("c4_diagram")
+graph =     C4Context
+      title System Context diagram for Internet Banking System
+      Enterprise_Boundary(b0, "BankBoundary0") {
+        Person(customerA, "Banking Customer A", "A customer of the bank, with personal bank accounts.")
+        Person(customerB, "Banking Customer B")
+        Person_Ext(customerC, "Banking Customer C", "desc")
+
+        Person(customerD, "Banking Customer D", "A customer of the bank, <br/> with personal bank accounts.")
+
+        System(SystemAA, "Internet Banking System", "Allows customers to view information about their bankaccounts, and make payments.")
+
+        Enterprise_Boundary(b1, "BankBoundary") {
+
+          SystemDb_Ext(SystemE, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+
+          System_Boundary(b2, "BankBoundary2") {
+            System(SystemA, "Banking System A")
+            System(SystemB, "Banking System B", "A system of the bank, with personal bank accounts. next line.")
+          }
+
+          System_Ext(SystemC, "E-mail system", "The internal Microsoft Exchange e-mail system.")
+          SystemDb(SystemD, "Banking System D Database", "A system of the bank, with personal bank accounts.")
+
+          Boundary(b3, "BankBoundary3", "boundary") {
+            SystemQueue(SystemF, "Banking System F Queue", "A system of the bank.")
+            SystemQueue_Ext(SystemG, "Banking System G Queue", "A system of the bank, with personal bank accounts.")
+          }
+        }
+      }
+
+      BiRel(customerA, SystemAA, "Uses")
+      BiRel(SystemAA, SystemE, "Uses")
+      Rel(SystemAA, SystemC, "Sends e-mails", "SMTP")
+      Rel(SystemC, customerA, "Sends e-mails to")
+
+      UpdateElementStyle(customerA, $fontColor="red", $bgColor="grey", $borderColor="red")
+      UpdateRelStyle(customerA, SystemAA, $textColor="blue", $lineColor="blue", $offsetX="5")
+      UpdateRelStyle(SystemAA, SystemE, $textColor="blue", $lineColor="blue", $offsetY="-10")
+      UpdateRelStyle(SystemAA, SystemC, $textColor="blue", $lineColor="blue", $offsetY="-40", $offsetX="-50")
+      UpdateRelStyle(SystemC, customerA, $textColor="red", $lineColor="red", $offsetX="-50", $offsetY="20")
+
+      UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="mindmap" class="title1 q-ma-md text-primary">思维导图</div>
+                        <div class="text-h5 q-ma-md text-red-10">思维导图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/mindmap.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用思维导图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("mindmap")
+graph = mindmap
+  root((mindmap))
+    Origins
+      Long history
+      ::icon(fa fa-book)
+      Popularisation
+        British popular psychology author Tony Buzan
+    Research
+      On effectiveness<br/>and features
+      On Automatic creation
+        Uses
+            Creative techniques
+            Strategic planning
+            Argument mapping
+    Tools
+      Pen and paper
+      Mermaid
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="timeline" class="title1 q-ma-md text-primary">时间线图</div>
+                        <div class="text-h5 q-ma-md text-red-10">时间线图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/timeline.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用时间线图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("timeline")
+graph = timeline
+    title History of Social Media Platform
+    2002 : LinkedIn
+    2004 : Facebook
+         : Google
+    2005 : YouTube
+    2006 : Twitter
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="zenuml" class="title1 q-ma-md text-primary">ZenUML</div>
+                        <div class="text-h5 q-ma-md text-red-10">ZenUML的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/zenuml.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用ZenUML示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("zenuml")
+graph = zenuml
+    title Demo
+    Alice->John: Hello John, how are you?
+    John->Alice: Great!
+    Alice->John: See you later!
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="sankey_diagram" class="title1 q-ma-md text-primary">Sankey图</div>
+                        <div class="text-h5 q-ma-md text-red-10">Sankey图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/sankey.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用Sankey图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("sankey_diagram")
+graph = ---
+config:
+  sankey:
+    showValues: false
+---
+sankey
+
+Agricultural 'waste',Bio-conversion,124.729
+Bio-conversion,Liquid,0.597
+Bio-conversion,Losses,26.862
+Bio-conversion,Solid,280.322
+Bio-conversion,Gas,81.144
+Biofuel imports,Liquid,35
+Biomass imports,Solid,35
+Coal imports,Coal,11.606
+Coal reserves,Coal,63.965
+Coal,Solid,75.571
+District heating,Industry,10.639
+District heating,Heating and cooling - commercial,22.505
+District heating,Heating and cooling - homes,46.184
+Electricity grid,Over generation / exports,104.453
+Electricity grid,Heating and cooling - homes,113.726
+Electricity grid,H2 conversion,27.14
+Electricity grid,Industry,342.165
+Electricity grid,Road transport,37.797
+Electricity grid,Agriculture,4.412
+Electricity grid,Heating and cooling - commercial,40.858
+Electricity grid,Losses,56.691
+Electricity grid,Rail transport,7.863
+Electricity grid,Lighting & appliances - commercial,90.008
+Electricity grid,Lighting & appliances - homes,93.494
+Gas imports,Ngas,40.719
+Gas reserves,Ngas,82.233
+Gas,Heating and cooling - commercial,0.129
+Gas,Losses,1.401
+Gas,Thermal generation,151.891
+Gas,Agriculture,2.096
+Gas,Industry,48.58
+Geothermal,Electricity grid,7.013
+H2 conversion,H2,20.897
+H2 conversion,Losses,6.242
+H2,Road transport,20.897
+Hydro,Electricity grid,6.995
+Liquid,Industry,121.066
+Liquid,International shipping,128.69
+Liquid,Road transport,135.835
+Liquid,Domestic aviation,14.458
+Liquid,International aviation,206.267
+Liquid,Agriculture,3.64
+Liquid,National navigation,33.218
+Liquid,Rail transport,4.413
+Marine algae,Bio-conversion,4.375
+Ngas,Gas,122.952
+Nuclear,Thermal generation,839.978
+Oil imports,Oil,504.287
+Oil reserves,Oil,107.703
+Oil,Liquid,611.99
+Other waste,Solid,56.587
+Other waste,Bio-conversion,77.81
+Pumped heat,Heating and cooling - homes,193.026
+Pumped heat,Heating and cooling - commercial,70.672
+Solar PV,Electricity grid,59.901
+Solar Thermal,Heating and cooling - homes,19.263
+Solar,Solar Thermal,19.263
+Solar,Solar PV,59.901
+Solid,Agriculture,0.882
+Solid,Thermal generation,400.12
+Solid,Industry,46.477
+Thermal generation,Electricity grid,525.531
+Thermal generation,Losses,787.129
+Thermal generation,District heating,79.329
+Tidal,Electricity grid,9.452
+UK land based bioenergy,Bio-conversion,182.01
+Wave,Electricity grid,19.013
+Wind,Electricity grid,289.366
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="xy_chart" class="title1 q-ma-md text-primary">XY图</div>
+                        <div class="text-h5 q-ma-md text-red-10">XY图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/xyChart.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用XY图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("xy_chart")
+graph = xychart
+    title "Sales Revenue"
+    x-axis [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
+    y-axis "Revenue (in $)" 4000 --> 11000
+    bar [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+    line [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="block_diagram" class="title1 q-ma-md text-primary">方块图</div>
+                        <div class="text-h5 q-ma-md text-red-10">方块图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/block.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用方块图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("block_diagram")
+graph = block
+columns 1
+  db(("DB"))
+  blockArrowId6&lt;["& nbsp;& nbsp;& nbsp;"]>(down)
+  block:ID
+    A
+    B["A wide one in the middle"]
+    C
+  end
+  space
+  D
+  ID --> D
+  C --> D
+  style B fill:#969,stroke:#333,stroke-width:4px
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="packet_diagram" class="title1 q-ma-md text-primary">数据包图</div>
+                        <div class="text-h5 q-ma-md text-red-10">数据包图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/packet.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用数据包图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("packet_diagram")
+graph = packet
+title UDP Packet
++16: "Source Port"
++16: "Destination Port"
+32-47: "Length"
+48-63: "Checksum"
+64-95: "Data (variable length)"
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="mermaid_s_kanban_diagram" class="title1 q-ma-md text-primary">Mermaid的看板图</div>
+                        <div class="text-h5 q-ma-md text-red-10">Mermaid的看板图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/kanban.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用Mermaid的看板图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("mermaid_s_kanban_diagram")
+graph = kanban
+todo[Todo]
+  id3[Update Database Function]@{ ticket: MC-2037, assigned: 'knsv', priority: 'High' }
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="architecture_diagram" class="title1 q-ma-md text-primary">架构图</div>
+                        <div class="text-h5 q-ma-md text-red-10">架构图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/architecture.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用架构图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("architecture_diagram")
+graph = architecture-beta
+    group api(cloud)[API]
+
+    service db(database)[Database] in api
+    service disk1(disk)[Storage] in api
+    service disk2(disk)[Storage] in api
+    service server(server)[Server] in api
+
+    db:L -- R:server
+    disk1:T -- B:server
+    disk2:T -- B:db
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="radar_diagram" class="title1 q-ma-md text-primary">雷达图</div>
+                        <div class="text-h5 q-ma-md text-red-10">雷达图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/radar.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用雷达图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("radar_diagram")
+graph = ---
+title: "Grades"
+---
+radar-beta
+  axis m["Math"], s["Science"], e["English"]
+  axis h["History"], g["Geography"], a["Art"]
+  curve a["Alice"]{85, 90, 80, 70, 75, 90}
+  curve b["Bob"]{70, 75, 85, 80, 90, 85}
+
+  max 100
+  min 0
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="treemap_diagram" class="title1 q-ma-md text-primary">矩形树图</div>
+                        <div class="text-h5 q-ma-md text-red-10">矩形树图的文档详见：</div>
+                        <p class="q-ma-md">https://mermaid.js.org/syntax/treemap.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">用矩形树图示例绘图并显示，代码如下：</div>
+                        <pre><code class="matlab">>> graph = mermaid_js_examples("treemap_diagram")
+graph = treemap-beta
+"Category A"
+    "Item A1": 10
+    "Item A2": 20
+"Category B"
+    "Item B1": 15
+    "Item B2": 25
+>> mermaid_js_imshow(graph)</code></pre>
+                        <q-separator></q-separator>
+                        <div id="references" class="title1 q-ma-md text-primary">引用octave_mermaid_js</div>
+                        <div class="text-h5 q-ma-md text-red-10">如果你在学术研究中涉及octave_mermaid_js，那么可以按需引用以下内容。</div>
+                        <div class="text-h5 q-ma-md text-red-10">octave_mermaid_js源码(BibTeX)</div>
+                        <p class="q-ma-md">@misc{CNOCTAVE2025,
+                            author = {Yu Hongbo, },
+                            title = {octave_mermaid_js},
+                            year = {2025},
+                            howpublished = {\url{https://github.com/CNOCTAVE/octave_mermaid_js}},
+                          }</p>
+                        <div class="text-h5 q-ma-md text-red-10">octave_mermaid_js文档(BibTeX)</div>
+                        <p class="q-ma-md">@techreport{CNOCTAVE2025,
+                            author = {Yu Hongbo, },
+                            title = {octave_mermaid_js Document},
+                            institution = {BA DU XIN SHANG},
+                            year = {2025},
+                            number = {16},
+                            month = {5},
+                            url = {https://cnoctave.github.io/octave_mermaid_js/index.html},
+                            urldate = {2025-05-16},
+                          }</p>
+                    </div>
+                </div>
+                <q-toolbar class="bg-grey-8 text-white q-my-md shadow-2">
+                    <q-btn-dropdown stretch flat label="版权所有 ©">
+                      <q-list>
+                        <q-item clickable v-close-popup @click="goTo('http://cnoctave.top')">
+                          <q-item-section>
+                            <q-item-label>© 2024-2025 CNOCTAVE</q-item-label>
+                          </q-item-section>
+                        </q-item>
+                        <q-item clickable v-close-popup @click="goTo('https://orcid.org/0009-0007-9436-4161')">
+                          <q-item-section>
+                            <q-item-label>© 2024-2025 Yu Hongbo</q-item-label>
+                          </q-item-section>
+                        </q-item>
+                      </q-list>
+                    </q-btn-dropdown>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="此文档受Creative Commons Attribution-NoDerivatives 4.0 International License协议保护。" 
+                    @click="goTo('https://creativecommons.org/licenses/by-nd/4.0/')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="下载此文档的源码" 
+                    @click="goTo('https://github.com/CNOCTAVE/octave_mermaid_js')"></q-btn>
+                </q-toolbar>
+            </q-page-container>
+
+        </q-layout>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.17.0/dist/quasar.umd.prod.js"></script>
+    <script>
+
+        const App = {
+            data() {
+                return {
+                    scrollToTop() {
+                        window.scrollTo(0, 0);
+                    },
+                    goTo(target) {
+                        window.open(target, '_blank');
+                    },
+                    goToID(target) {
+                        window.open(target, '_self');
+                    },
+                    leftDrawerOpen: true,
+                };
+            },
+        };
+        const app = Vue.createApp(App);
+
+        app.use(Quasar)
+        app.mount('#q-app')
+    </script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</body>
+
+</html>

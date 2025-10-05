@@ -1,0 +1,7 @@
+引用octave_mermaid_js
+如果你在学术研究中涉及octave_mermaid_js，那么可以按需引用以下内容。
+octave_mermaid_js源码(BibTeX)
+@misc{CNOCTAVE2025, author = {Yu Hongbo, }, title = {octave_mermaid_js}, year = {2025}, howpublished = {\url{https://github.com/CNOCTAVE/octave_mermaid_js}}, }
+
+octave_mermaid_js文档(BibTeX)
+@techreport{CNOCTAVE2025, author = {Yu Hongbo, }, title = {octave_mermaid_js Document}, institution = {BA DU XIN SHANG}, year = {2025}, number = {21}, month = {10}, url = {https://cnoctave.github.io/octave_mermaid_js/index.html}, urldate = {2025-05-16}, }

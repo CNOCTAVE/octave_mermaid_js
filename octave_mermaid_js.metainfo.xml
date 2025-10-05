@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2024-2025 Yu Hongbo <yuhongbo@member.fsf.org>, 
+  CNOCTAVE <cnoctave@qq.com>
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.
+-->
+<component type="addon">
+  <id>octave_mermaid_js</id>
+  <extends>www.octave.org-octave.desktop</extends>
+  <name>octave_mermaid_js</name>
+  <summary>A wrapper for Mermaid.js</summary>
+  <description>
+    <p>The octave_mermaid_js package is used to generate,
+      show and save a diagram from a Mermaid graph description 
+      string.
+      You can use octave_mermaid_js to create flowcharts, 
+      sequence diagrams, class diagrams, state diagrams, 
+      ER diagram, user journey diagrams, Gantt charts, 
+      pie charts, quadrant charts, requirement diagrams, 
+      Git Graphs, C4 Diagrams, Mindmaps, timelines, ZenUML, 
+      Sankey diagrams, XY Charts, Block Diagrams, 
+      packet diagrams, Mermaid’s Kanban diagrams, 
+      architecture diagrams, radar diagrams and
+      treemap diagrams.</p>
+  </description>
+    <keywords>
+    <keyword>Mermaid.js</keyword>
+    <keyword>mermaid</keyword>
+    <keyword>Markdown</keyword>
+  </keywords>
+  <url type="homepage">https://github.com/CNOCTAVE/octave_mermaid_js</url>
+  <url type="bugtracker">https://github.com/CNOCTAVE/octave_mermaid_js/issues</url>
+  <url type="document">https://cnoctave.github.io/octave_mermaid_js/index.html</url>
+  <project_license>GPL-3.0+</project_license>
+  <developer_name>various authors</developer_name>
+  <update_contact>cnoctave@qq.com</update_contact>
+  <metadata_license>FSFAP</metadata_license>
+</component>

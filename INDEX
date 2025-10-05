@@ -1,0 +1,5 @@
+octave_mermaid_js >> A wrapper for Mermaid.js
+Functions
+ mermaid_js_examples
+ mermaid_js_imshow
+ mermaid_js_save
