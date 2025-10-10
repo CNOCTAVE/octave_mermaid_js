@@ -21,4 +21,4 @@ jobs:
       # uncomment this on demand
       - run: sudo chmod -R a+x octave_mermaid_js/inst
       - run: tar --warning=no-file-changed --exclude='octave_mermaid_js/.git' --exclude='octave_mermaid_js/.github' -czvf octave_mermaid_js.tar.gz octave_mermaid_js
-      - run: gh release upload 0.1.0 octave_mermaid_js.tar.gz --repo $GITHUB_REPOSITORY
+      - run: gh release upload 1.0.0 octave_mermaid_js.tar.gz --repo $GITHUB_REPOSITORY
