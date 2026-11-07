@@ -16,9 +16,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: 'octave_mermaid_js'
+      # Install the Node.js runtime dependency (puppeteer-core) and vendor it
+      # inside the package so the published tarball is self-contained (the
+      # Octave package installs inst/ to its root, so node_modules must live
+      # under inst/vendor to survive `pkg install`).
+      - run: cd octave_mermaid_js && npm install
+      - run: cd octave_mermaid_js && rm -rf inst/vendor/node_modules && cp -r node_modules inst/vendor/node_modules
       # uncomment this on demand
-      # - run: sudo chmod a+x octave_mermaid_js/src/configure
+      - run: sudo chmod a+x octave_mermaid_js/src/configure
       # uncomment this on demand
       - run: sudo chmod -R a+x octave_mermaid_js/inst
-      - run: tar --warning=no-file-changed --exclude='octave_mermaid_js/.git' --exclude='octave_mermaid_js/.github' -czvf octave_mermaid_js.tar.gz octave_mermaid_js
-      - run: gh release upload 1.0.0 octave_mermaid_js.tar.gz --repo $GITHUB_REPOSITORY
+      - run: tar --warning=no-file-changed --exclude='octave_mermaid_js/.git' --exclude='octave_mermaid_js/.github' --exclude='octave_mermaid_js/node_modules' -czvf octave_mermaid_js.tar.gz octave_mermaid_js
+      - run: gh release upload 2.0.0 octave_mermaid_js.tar.gz --repo $GITHUB_REPOSITORY

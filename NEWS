@@ -1,3 +1,26 @@
+ ** v2.0.0
+ Architecture migration (offline rendering, no remote web API).
+   * mermaid.js is now vendored into the package under ./vendor/mermaid.min.js
+     (version 12.3.0).  The previous dependency on the mermaid.ink web API
+     (which is becoming a paid service) has been removed; diagrams are
+     generated entirely on the local machine.
+   * A new Node.js renderer (inst/mermaid_js_render.mjs) runs the vendored
+     mermaid.js bundle inside a headless Chromium.  Chromium is a C++
+     implementation of the V8 JavaScript engine together with the Blink
+     DOM/SVG layout engine, so mermaid receives a real DOM and correct text
+     measurement (getBBox) and produces accurate diagrams.
+   * The Octave functions mermaid_js_save and mermaid_js_imshow now invoke the
+     Node renderer instead of the old Python + mermaid.ink code path
+     (inst/mermaid_js_save.py has been removed).
+   * Runtime requirements (new): Node.js and a Chromium/Chrome browser.  The
+     Chromium executable is located automatically, or overridden with the
+     CHROMIUM_PATH environment variable.  Node dependencies are installed with
+     "npm install" (puppeteer-core).
+   * Build/test note: because the JavaScript runtime is the system Chromium/Node
+     (C++), the package itself needs no extra compilation step.  On the test
+     machine (WSL Fedora 44) Octave 10.3.0 installs and runs the new
+     architecture correctly.
+-------------------------------------------------------
  ** v1.0.0
  Add document website.  
  Add bug tracker website.  

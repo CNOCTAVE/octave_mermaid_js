@@ -17,6 +17,11 @@
 ## -*- texinfo -*-
 ## @deftypefn {} {[ret, status] =} mermaid_js_imshow (@var{graph})  
 ## Generate and display a diagram from a Mermaid graph description string.
+##
+## Since v2.0.0 the diagram is rendered locally (offline) by running the
+## vendored mermaid.js bundle inside a headless Chromium -- a C++ V8 JavaScript
+## runtime -- via the Node script @code{mermaid_js_render.mjs}.  No remote web
+## API is contacted any more.
 ## @example
 ## param: graph
 ##
@@ -37,11 +42,13 @@ function [ret, status] = mermaid_js_imshow(graph)
     ret = "";
     status = -1;
     file_path = [tempname(), ".png"];
-    [ret, status] = python("mermaid_js_save.py", matlab.net.base64encode(graph), file_path);
+    [ret, status] = mermaid_js_save(graph, file_path);
     imshow(file_path);
     unwind_protect
         disp("cleaning up temporary file...");
     unwind_protect_cleanup
-        delete(file_path);
+        if (exist(file_path, "file"))
+            delete(file_path);
+        endif
     end_unwind_protect
 endfunction

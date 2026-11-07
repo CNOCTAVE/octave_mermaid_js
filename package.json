@@ -1,0 +1,18 @@
+{
+  "name": "octave_mermaid_js",
+  "version": "2.0.0",
+  "description": "Offline Mermaid.js diagram renderer for the octave_mermaid_js GNU Octave package. Runs the vendored mermaid.min.js inside headless Chromium (C++ V8) via Node.js.",
+  "license": "GPL-3.0-or-later",
+  "private": true,
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CNOCTAVE/octave_mermaid_js.git"
+  },
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "puppeteer-core": "^25.16.0"
+  }
+}

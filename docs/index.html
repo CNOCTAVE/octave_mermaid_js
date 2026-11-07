@@ -357,7 +357,7 @@ without any warranty.
                         <div id="online_install" class="title1 q-ma-md text-primary">在线安装</div>
                         <p class="q-ma-md">octave_mermaid_js可以在线安装。</p>
                         <div class="text-h5 q-ma-md text-red-10">在线安装octave_mermaid_js，代码如下：</div>
-                        <p class="q-ma-md">>> pkg install 'https://github.com/CNOCTAVE/octave_mermaid_js/releases/download/1.0.0/octave_mermaid_js.tar.gz'</p>
+                        <p class="q-ma-md">>> pkg install 'https://github.com/CNOCTAVE/octave_mermaid_js/releases/download/2.0.0/octave_mermaid_js.tar.gz'</p>
                         <q-separator></q-separator>
                         <div id="source_code_install" class="title1 q-ma-md text-primary">源码安装</div>
                         <p class="q-ma-md">octave_mermaid_js可以直接使用tar包安装。</p>
@@ -370,10 +370,14 @@ without any warranty.
                         <p class="q-ma-md">>> pkg load octave_mermaid_js</p>
                         <q-separator></q-separator>
                         <div id="dependencies" class="title1 q-ma-md text-primary">依赖库</div>
-                        <div class="text-h5 q-ma-md text-red-10">不同的Linux发行版有不同的依赖库名。</div>
-                        <div class="text-h5 q-ma-md text-red-10">Fedora：</div>
-                        <p class="q-ma-md">$ sudo dnf install python3-pillow python3-matplotlib python3-requests</p>
-                        <div class="text-h5 q-ma-md text-red-10">在其他的Linux发行版上的命令有所不同。欢迎广大开发者补充。
+                        <div class="text-h5 q-ma-md text-red-10">自 v2.0.0 起，octave_mermaid_js 不再调用远程 Web API，而是把 mermaid.js 以 vendor 的形式内置到软件包中（位于 ./vendor/mermaid.min.js），并在本地用 Node.js 驱动一个无头 Chromium（C++ 实现的 V8 JavaScript 运行时 + Blink 排版引擎）来渲染图片。因此运行时的依赖变为：</div>
+                        <div class="text-h5 q-ma-md text-red-10">1. Node.js（提供 V8 JavaScript 运行时）。</div>
+                        <div class="text-h5 q-ma-md text-red-10">2. 一个 Chromium / Chrome 浏览器（无头渲染）。</div>
+                        <div class="text-h5 q-ma-md text-red-10">3. Node 依赖 puppeteer-core（在软件包目录执行 npm install 安装）。</div>
+                        <div class="text-h5 q-ma-md text-red-10">不同的 Linux 发行版安装命令有所不同。Fedora 示例：</div>
+                        <p class="q-ma-md">$ sudo dnf install nodejs chromium-headless</p>
+                        <p class="q-ma-md">$ cd octave_mermaid_js &amp;&amp; npm install</p>
+                        <div class="text-h5 q-ma-md text-red-10">如果你的 Chromium 不在标准路径，可用 CHROMIUM_PATH 环境变量指定其可执行文件路径。欢迎广大开发者补充其他发行版的安装命令。
                         </div>
                         <q-separator></q-separator>
                         <div id="function_usage" class="title1 q-ma-md text-primary">函数用法</div>

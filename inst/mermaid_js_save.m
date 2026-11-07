@@ -17,6 +17,11 @@
 ## -*- texinfo -*-
 ## @deftypefn {} {[ret, status] =} mermaid_js_save (@var{graph}, @var{file_path})  
 ## Generate and save a diagram from a Mermaid graph description string.
+##
+## Since v2.0.0 the diagram is rendered locally (offline) by running the
+## vendored mermaid.js bundle inside a headless Chromium -- a C++ V8 JavaScript
+## runtime -- via the Node script @code{mermaid_js_render.mjs}.  No remote web
+## API is contacted any more.
 ## @example
 ## param: graph, file_path
 ##
@@ -40,7 +45,39 @@ function [ret, status] = mermaid_js_save(graph, file_path)
     if (length(file_path) == 0)
         error('File Path must not be empty.');
     endif
+
     ret = "";
     status = -1;
-    [ret, status] = python("mermaid_js_save.py", matlab.net.base64encode(graph), file_path);
+
+    ## Locate the Node renderer shipped next to this .m file.
+    me = mfilename("fullpath");
+    [dir, ~, ~] = fileparts(me);
+    renderer = fullfile(dir, "mermaid_js_render.mjs");
+
+    ## Write the graph to a temp file; the renderer reads it back.  This avoids
+    ## shell-quoting problems with multi-line graphs and special characters.
+    graph_file = [tempname(), ".mmd"];
+    fid = fopen(graph_file, "w");
+    if (fid < 0)
+        error('mermaid_js_save: cannot create temporary graph file.');
+    endif
+    fprintf(fid, "%s", graph);
+    fclose(fid);
+
+    unwind_protect
+        cmd = sprintf('node "%s" "%s" "%s" default', renderer, graph_file, file_path);
+        [status, output] = system(cmd);
+        if (status == 0 && strncmp(output, "ok:", 3) == 1)
+            ret = output;
+        else
+            if (status != 0)
+                error('mermaid_js_save: renderer failed (status %d):\n%s', status, output);
+            endif
+            ret = output;
+        endif
+    unwind_protect_cleanup
+        if (exist(graph_file, "file"))
+            delete(graph_file);
+        endif
+    end_unwind_protect
 endfunction
